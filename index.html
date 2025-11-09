@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jakub G | Junior Systems Administrator</title>
+    <style>
+      :root {
+        --bg: #0d0d16;
+        --card: #18182b;
+        --highlight: #a262ff;
+        --highlight-strong: #c28bff;
+        --text: #f7f6ff;
+        --muted: #b9b5cc;
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at 20% 20%, rgba(162, 98, 255, 0.25), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(71, 41, 110, 0.45), transparent 50%), var(--bg);
+        color: var(--text);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        padding: 2rem;
+      }
+
+      .noise {
+        position: fixed;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Crect width='160' height='160' fill='rgba(255,255,255,0.015)'/%3E%3C/svg%3E");
+        mix-blend-mode: screen;
+        opacity: 0.25;
+        pointer-events: none;
+      }
+
+      main {
+        position: relative;
+        width: min(1280px, 98vw);
+        display: grid;
+        gap: 2.5rem;
+        padding: 3rem;
+        background: linear-gradient(135deg, rgba(24, 24, 43, 0.9), rgba(12, 12, 20, 0.8));
+        border-radius: 32px;
+        border: 1px solid var(--border);
+        box-shadow: 0 35px 80px rgba(0, 0, 0, 0.55);
+        overflow: hidden;
+      }
+
+      .glow {
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(circle, rgba(162, 98, 255, 0.15), transparent 65%);
+        filter: blur(40px);
+        z-index: -1;
+      }
+
+      .intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      .intro-content {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .intro h1 {
+        font-size: clamp(3rem, 5vw, 4.2rem);
+        margin: 0;
+        line-height: 1.05;
+      }
+
+      .intro .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.35em;
+        font-size: 1.75rem;
+        color: var(--muted);
+      }
+
+      .intro .tagline {
+        margin: 0;
+        color: rgba(247, 246, 255, 0.9);
+        font-size: 1.2rem;
+      }
+
+      .cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+
+      .cta a {
+        text-decoration: none;
+        padding: 0.85rem 1.6rem;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        border: 1px solid transparent;
+      }
+
+      .cta a.primary {
+        background: var(--highlight);
+        color: #120824;
+        box-shadow: 0 15px 35px rgba(162, 98, 255, 0.35);
+      }
+
+      .cta a.secondary {
+        color: var(--text);
+        border-color: var(--border);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .cta a:hover {
+        transform: translateY(-2px);
+      }
+
+      .profile {
+        margin: 0;
+        justify-self: center;
+        text-align: center;
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .photo-frame {
+        width: min(320px, 80vw);
+        height: min(360px, 85vw);
+        border-radius: 36px;
+        background: radial-gradient(circle at 30% 20%, rgba(226, 203, 56, 0.45), transparent 55%),
+          rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
+        padding: 1.2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .photo-frame::after {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border-radius: 28px;
+        border: 1px dashed rgba(255, 255, 255, 0.08);
+        pointer-events: none;
+      }
+
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 24px;
+        display: block;
+      }
+
+      .profile figcaption {
+        font-size: 0.95rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .panel {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 1.5rem;
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .panel h2 {
+        margin: 0;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+      }
+
+      .panel p {
+        margin: 0;
+        color: rgba(247, 246, 255, 0.9);
+      }
+
+      .pill-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+
+      .pill-list li {
+        padding: 0.45rem 0.9rem;
+        background: rgba(162, 98, 255, 0.12);
+        border: 1px solid rgba(162, 98, 255, 0.25);
+        border-radius: 999px;
+        font-size: 0.95rem;
+      }
+
+      .list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .list li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .list li::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--highlight);
+        box-shadow: 0 0 12px var(--highlight);
+      }
+
+      .stats {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+      }
+
+      .stat {
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .stat span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .stat strong {
+        font-size: 1.6rem;
+        color: var(--highlight-strong);
+      }
+
+      @media (max-width: 900px) {
+        .intro {
+          grid-template-columns: 1fr;
+        }
+
+        .profile {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 640px) {
+        main {
+          padding: 2rem;
+        }
+
+        .cta {
+          flex-direction: column;
+        }
+
+        .photo-frame {
+          width: 100%;
+          height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <main>
+      <div class="glow" aria-hidden="true"></div>
+      <section class="intro">
+        <div class="intro-content">
+          <p class="eyebrow">Jakub G</p>
+          <h1>Junior Systems Administrator</h1>
+          <p class="tagline">
+            Keeping Windows &amp; Linux estates resilient, automated, and secure with a pragmatic approach to networking,
+            monitoring, and incident-ready operations.
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <span>Experience</span>
+              <strong>2+ yrs</strong>
+            </div>
+            <div class="stat">
+              <span>Focus</span>
+              <strong>Infra &amp; Sec</strong>
+            </div>
+            <div class="stat">
+              <span>Location</span>
+              <strong>Gdańsk, Poland</strong>
+            </div>
+          </div>
+          <div class="cta">
+            <a class="primary" href="mailto:jakub.g@example.com">jakub.g@example.com</a>
+            <a class="secondary" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="secondary" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+        <figure class="profile">
+          <div class="photo-frame">
+            <img src="assets/jakubg.png" alt="Stylized portrait of Jakub G" loading="lazy" />
+          </div>
+          <figcaption>ready for on-call rotations</figcaption>
+        </figure>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>Mission</h2>
+          <p>
+            Bridge support and infrastructure engineering by combining care for uptime, scripted automation, and a
+            security-first mindset across mixed Windows/Linux fleets.
+          </p>
+        </article>
+
+        <article class="panel">
+          <h2>Skills</h2>
+          <ul class="pill-list">
+            <li>Windows Server</li>
+            <li>Linux</li>
+            <li>Active Directory</li>
+            <li>Python</li>
+            <li>Bash</li>
+            <li>TCP/IP</li>
+            <li>Networking</li>
+            <li>Ethical Hacking</li>
+            <li>Zabbix</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <h2>Certifications &amp; Courses</h2>
+          <ul class="list">
+            <li>Cisco CCNA</li>
+            <li>Sekurak Academy 2024</li>
+            <li>TCM Security - Practical Helpdesk</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <h2>Toolbox</h2>
+          <p>PowerShell, virtualization stacks, patch management, SIEM tuning, secure remote access, documentation.</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
+
